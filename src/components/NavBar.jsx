@@ -15,10 +15,10 @@ const NavBar = () => {
         </ul>
         <div className="flex-center">
           <button>
-            <img src="/public/search.svg" alt="Search Icon" />
+            <img src="/search.svg" alt="Search Icon" />
           </button>
           <button>
-            <img src="/public/cart.svg" alt="cart Icon" />
+            <img src="/cart.svg" alt="cart Icon" />
           </button>
         </div>
       </nav>
