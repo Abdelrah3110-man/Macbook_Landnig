@@ -16,7 +16,6 @@ const Performance = () => {
       const sectionEl = sectionRef.current;
       if (!sectionEl) return;
 
-      // Text Animation
       gsap.fromTo(
         ".content p",
         { opacity: 0, y: 10 },
@@ -27,39 +26,41 @@ const Performance = () => {
           scrollTrigger: {
             trigger: ".content p",
             start: "top bottom",
-            end: "top center",
+            end: " center top",
             scrub: true,
             invalidateOnRefresh: true,
           },
         },
       );
 
-      if (isMobile) return;
-
-      // Image Positioning Timeline
       const tl = gsap.timeline({
         defaults: { duration: 2, ease: "power1.inOut", overwrite: "auto" },
         scrollTrigger: {
           trigger: sectionEl,
           start: "top bottom",
-          end: "bottom top",
+          end: "center top",
           scrub: 1,
           invalidateOnRefresh: true,
         },
       });
 
-      // Position Each Performance Image
       performanceImgPositions.forEach((item) => {
         if (item.id === "p5") return;
 
         const selector = `.${item.id}`;
+
+        const pos = isMobile ? item.mobile : item.desktop;
+
         const vars = {};
 
-        if (typeof item.left === "number") vars.left = `${item.left}%`;
-        if (typeof item.right === "number") vars.right = `${item.right}%`;
-        if (typeof item.bottom === "number") vars.bottom = `${item.bottom}%`;
+        if (typeof pos.left === "number") vars.left = `${pos.left}%`;
+        if (typeof pos.right === "number") vars.right = `${pos.right}%`;
+        if (typeof pos.bottom === "number") vars.bottom = `${pos.bottom}%`;
 
-        if (item.transform) vars.transform = item.transform;
+        if (typeof pos.scale === "number") vars.scale = pos.scale;
+
+        if (!isMobile && item.desktop.transform)
+          vars.transform = item.desktop.transform;
 
         tl.to(selector, vars, 0);
       });
@@ -68,15 +69,17 @@ const Performance = () => {
   );
 
   return (
-    <section id="performance" ref={sectionRef}>
-      <h2>Next-level graphics performance. Game on.</h2>
+    <section id="performance" ref={sectionRef} className="overflow-hidden">
+      <h2 className="text-center px-5">
+        Next-level graphics performance. Game on.
+      </h2>
 
-      <div className="wrapper">
+      <div className="wrapper relative w-full">
         {performanceImages.map((item, index) => (
           <img
             key={index}
             src={item.src}
-            className={item.id}
+            className={`${item.id} absolute will-change-transform`}
             alt={item.alt || `Performance Image #${index + 1}`}
           />
         ))}
@@ -99,4 +102,5 @@ const Performance = () => {
     </section>
   );
 };
+
 export default Performance;
