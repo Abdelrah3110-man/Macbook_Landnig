@@ -96,13 +96,13 @@ const performanceImgPositions = [
     mobile: { right: -5, bottom: 5, scale: 0.7 },
   },
   {
-    id: "p5", // الصورة المركزية الكبيرة (Chip)
+    id: "p5",
     desktop: { left: 20, bottom: 50 },
     mobile: { left: 0, bottom: 40, scale: 1.4 },
   },
   {
     id: "p6",
-    desktop: { left: 2, bottom: 30 },
+    desktop: { left: 2, bottom: 40 },
     mobile: { left: -2, bottom: 20, scale: 0.7 },
   },
   {
