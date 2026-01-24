@@ -24,7 +24,13 @@ const Showcase = () => {
   return (
     <section id="showcase">
       <div className="media">
-        <video src="/videos/game.mp4" loop muted autoPlay playsInline />
+        <video
+          src="https://res.cloudinary.com/dvlwfzrx5/video/upload/f_auto:video,q_auto/v1769271292/game_mscv29.mp4"
+          loop
+          muted
+          autoPlay
+          playsInline
+        />
         <div className="mask">
           <img src="/mask-logo.svg" />
         </div>
