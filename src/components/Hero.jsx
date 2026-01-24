@@ -14,7 +14,13 @@ const Hero = () => {
         <img src="/title.png" alt="MacBook Title" />
       </div>
 
-      <video ref={videoRef} src="/videos/hero.mp4" autoPlay muted playsInline />
+      <video
+        ref={videoRef}
+        src="https://res.cloudinary.com/dvlwfzrx5/video/upload/q_auto,f_auto,vc_h265/v1769271639/hero_noujjp.mp4"
+        autoPlay
+        muted
+        playsInline
+      />
       <button>Buy</button>
       <p>From $1599 or $133/mo for 12 months</p>
     </section>
