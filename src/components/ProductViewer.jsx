@@ -1,16 +1,33 @@
+import { useEffect } from "react";
 import clsx from "clsx";
 import useMacbookStore from "../store";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import MacbookModel14 from "../models/Macbook-14";
+import { OrbitControls, useProgress } from "@react-three/drei";
 import StudioLights from "./three/StudioLights";
-import MacbookModel16 from "../models/Macbook-16";
 import ModelSwitcher from "./three/ModelSwitcher";
 import { useMediaQuery } from "react-responsive";
 
-const ProductViewer = () => {
+const LoaderTracker = ({ setLoading }) => {
+  const { progress } = useProgress();
+
+  useEffect(() => {
+    const bar = document.getElementById("progress-bar");
+    if (bar) bar.style.width = `${progress}%`;
+
+    if (progress === 100) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+    }
+  }, [progress, setLoading]);
+
+  return null;
+};
+
+const ProductViewer = ({ setLoading }) => {
   const { color, scale, setColor, setScale } = useMacbookStore();
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
+
   return (
     <section id="product-viewer">
       <h2>Take a closer look.</h2>
@@ -59,18 +76,19 @@ const ProductViewer = () => {
           </div>
         </div>
       </div>
+
       <Canvas
         id="canvas"
         camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100 }}>
-        <StudioLights />
+        <LoaderTracker setLoading={setLoading} />
 
-        {/* <MacbookModel14 scale={0.06} position={[0, 0, 0]} /> */}
-        {/* <MacbookModel16 scale={0.08} position={[0, 0, 0]} /> */}
+        <StudioLights />
 
         <ModelSwitcher
           scale={isMobile ? scale - 0.03 : scale}
           isMobile={isMobile}
         />
+        <OrbitControls enableZoom={false} />
       </Canvas>
     </section>
   );
