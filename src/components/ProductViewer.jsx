@@ -88,7 +88,7 @@ const ProductViewer = ({ setLoading }) => {
           scale={isMobile ? scale - 0.03 : scale}
           isMobile={isMobile}
         />
-        <OrbitControls enableZoom={false} />
+        {/* <OrbitControls enableZoom={false} /> */}
       </Canvas>
     </section>
   );
